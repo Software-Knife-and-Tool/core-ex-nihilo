@@ -25,13 +25,13 @@ using Tag = core::Type::Tag;
 
 /** * character type class **/
 class Char : public Type {
- public: /* Tag */
+ public: /* tag */
   static constexpr bool IsType(Tag ptr) {
     return IsImmediate(ptr) && (ImmediateClass(ptr) == IMMEDIATE_CLASS::CHAR);
   }
 
   static constexpr uint8_t Uint8Of(Tag ptr) {
-    assert(IsType(ptr));
+    assert(Char::IsType(ptr));
 
     return static_cast<uint8_t>(ImmediateData(ptr));
   }
@@ -41,8 +41,9 @@ class Char : public Type {
   static Tag Read(Env*, Tag);
   static Tag ViewOf(Env*, Tag);
 
- public: /* object model */
-  Tag Evict(Env*) { return tag_; }
+ public: /* type object model */
+  auto SysClass() -> SYS_CLASS { return SYS_CLASS::CHAR; }
+  auto Evict(Env*) -> Tag { return tag_; }
 
   explicit Char(uint8_t ch) : Type() {
     tag_ = MakeImmediate(ch, 0, IMMEDIATE_CLASS::CHAR);

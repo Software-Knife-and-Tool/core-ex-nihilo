@@ -170,8 +170,9 @@ class Type {
   static constexpr bool Null(Tag ptr) { return Eq(ptr, NIL); }
 
  public:    /* object model */
-  Tag tag_; /* tagged pointer for type constructors */
+  Tag tag_; /* tagged pointer for type evictors */
 
+  virtual SYS_CLASS SysClass() = 0;
   virtual Tag Evict(Env*) = 0;
 
 }; /* class Type */

@@ -11,7 +11,6 @@
  **  eval.h: eval/apply
  **
  **/
-
 #if !defined(LIBMU_EVAL_H_)
 #define LIBMU_EVAL_H_
 
@@ -31,7 +30,7 @@ namespace core {
 
 using Tag = Type::Tag;
 
-Tag Apply(Env*, Tag, Tag);
+Type& Apply(Env*, Type&, Type&);
 Tag Eval(Env*, Tag);
 
 } /* namespace core */

@@ -29,6 +29,7 @@
 #include "libmu/types/fixnum.h"
 #include "libmu/types/float.h"
 #include "libmu/types/function.h"
+#include "libmu/types/null.h"
 #include "libmu/types/stream.h"
 #include "libmu/types/struct.h"
 #include "libmu/types/symbol.h"

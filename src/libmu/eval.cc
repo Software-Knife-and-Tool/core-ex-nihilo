@@ -42,11 +42,11 @@ namespace libmu {
 namespace core {
 
 /** * apply function to argument list **/
-auto Apply(Env* env, Tag fn, Tag args) -> Tag {
-  assert(Function::IsType(fn));
-  assert(Cons::IsList(args));
+auto Apply(Env* env, Type& fn, Type& args) -> Type& {
+  assert(fn.SysClass() == SYS_CLASS::FUNCTION);
+  assert(args.SysClass() == SYS_CLASS::NULL || args.SysClass() == SYS_CLASS::CONS);
 
-  std::vector<Tag> argv;
+  std::vector<Type> argv;
   Cons::ListToVec(args, argv);
 
   return Function::Funcall(env, fn, argv);

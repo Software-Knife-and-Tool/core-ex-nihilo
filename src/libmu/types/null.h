@@ -8,11 +8,11 @@
 
 /********
  **
- **  address.h: library address object
+ **  null.h: null class
  **
  **/
-#if !defined(LIBMU_TYPES_ADDRESS_H_)
-#define LIBMU_TYPES_ADDRESS_H_
+#if !defined(LIBMU_TYPES_NULL_H_)
+#define LIBMU_TYPES_NULL_H_
 
 #include <cassert>
 #include <functional>
@@ -22,18 +22,14 @@
 #include "libmu/env.h"
 #include "libmu/type.h"
 
-#include "libmu/heap/heap.h"
-
-#include "libmu/types/fixnum.h"
-#include "libmu/types/symbol.h"
-
 namespace libmu {
 namespace core {
 
 /** * address class type **/
-class Address : public Type {
+class Null : public Type {
  public: /* Tag */
-  static constexpr bool IsType(Tag ptr) { return TagOf(ptr) == TAG::ADDRESS; }
+
+
   static auto ViewOf(Env* env, Tag addr) {
     assert(IsType(addr));
 
@@ -47,14 +43,13 @@ class Address : public Type {
   }
 
  public: /* object model */
-  auto SysClass() -> SYS_CLASS { return SYS_CLASS::ADDRESS; }
-  auto Evict(Env*) -> Tag { return tag_; }
+  static constexpr bool IsType(Tag ptr) { return TagOf(ptr) == TAG::ADDRESS; }
+  SYS_CLASS SysClass() { return SYS_CLASS::NULL; }
+  Tag Evict(Env*) { return tag_; }
 
-  explicit Address(void* caddr) : Type() {
-    tag_ = Type::Entag(caddr, TAG::ADDRESS);
-  }
+  explicit Null() : Type() { tag_ = NIL; }
 
-}; /* class Address */
+}; /* class Null */
 
 } /* namespace core */
 } /* namespace libmu */
